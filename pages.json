@@ -1,44 +1,67 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-app"
-			}
-		}, {
 			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "拼邮购首页",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/cate/cate",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "菜单导航",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/car/car",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "购物车",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/my/my",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "个人中心",
 				"enablePullDownRefresh": false
 			}
 
 		}
 	],
+	"tabBar": {
+		"selectedColor": "#1296db",
+		"list": [{
+				"pagePath": "pages/home/home",
+				"text": "首页",
+				"iconPath": "static/images/home.png",
+				"selectedIconPath": "static/images/home_active.png"
+			},
+			{
+				"pagePath": "pages/cate/cate",
+				"text": "分类",
+				"iconPath": "static/images/fenlei.png",
+				"selectedIconPath": "static/images/fenlei_active.png"
+			},
+			{
+				"pagePath": "pages/car/car",
+				"text": "购物车",
+				"iconPath": "static/images/car.png",
+				"selectedIconPath": "static/images/car_active.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "static/images/my.png",
+				"selectedIconPath": "static/images/my_active.png"
+			}
+		]
+	},
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "黑马优购",
+		"navigationBarBackgroundColor": "#C00000",
+		"backgroundColor": "#FFFFFF"
 	}
 }
