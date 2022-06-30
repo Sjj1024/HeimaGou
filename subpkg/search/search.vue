@@ -48,8 +48,7 @@
 				// 重新启动一个延时器，并把 timerId 赋值给 this.timer
 				this.timer = setTimeout(() => {
 					// 如果 500 毫秒内，没有触发新的输入事件，则为搜索关键词赋值
-					this.kw = e
-					// console.log("关键字是:" + this.kw)
+					this.kw = e.trim()
 					// 根据关键词，查询搜索建议列表
 					this.getSearchList()
 				}, 500)
@@ -150,6 +149,7 @@
 			flex-wrap: wrap;
 			padding-top: 10rpx;
 
+
 			.uni-tag {
 				margin-top: 5px;
 				margin-right: 5px;
@@ -160,5 +160,9 @@
 				border-color: #f5f8fe;
 			}
 		}
+	}
+
+	uni-tag {
+		margin-top: 10px;
 	}
 </style>
