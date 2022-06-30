@@ -82,6 +82,13 @@
 					"enablePullDownRefresh": false
 				}
 
+			}, {
+				"path": "search/search",
+				"style": {
+					"navigationBarTitleText": "商品搜索",
+					"enablePullDownRefresh": false
+				}
+
 			}
 		]
 	}]
