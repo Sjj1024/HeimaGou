@@ -1,5 +1,9 @@
 <template>
 	<view>
+<<<<<<< HEAD
+=======
+		<my-search @click="gotoSearch"></my-search>
+>>>>>>> search
 		<view class="scroll-view-container">
 			<!-- 左侧的滚动视图区域 -->
 			<scroll-view class="left-scroll-view" scroll-y :style="{height: wh + 'px'}">
@@ -49,7 +53,11 @@
 		onLoad() {
 			// 动态获取设备高度信息
 			const sysInfo = uni.getSystemInfoSync()
+<<<<<<< HEAD
 			this.wh = sysInfo.windowHeight
+=======
+			this.wh = sysInfo.windowHeight - 50
+>>>>>>> search
 			// 调用获取分类列表数据的方法
 			this.getCateList()
 		},
@@ -79,6 +87,15 @@
 				uni.navigateTo({
 					url: '/subpkg/goods_list/goods_list?cid=' + item3.cat_id
 				})
+<<<<<<< HEAD
+=======
+			},
+			// 跳转到分包中的搜索页面
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpkg/search/search'
+				})
+>>>>>>> search
 			}
 		}
 	}
