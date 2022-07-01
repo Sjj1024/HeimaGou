@@ -37,6 +37,7 @@
 </template>
 
 <script>
+	import carBadge from "@/mixins/tabbar-badge.js"
 	export default {
 		data() {
 			return {
@@ -48,6 +49,7 @@
 				floorList: [],
 			};
 		},
+		mixins: [carBadge],
 		onLoad() {
 			this.getSwiperList()
 			// 2. 在 onLoad 中调用获取数据的方法

@@ -40,6 +40,12 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapGetters
+	} from "vuex"
+
 	export default {
 		data() {
 			return {
@@ -51,7 +57,7 @@
 				}, {
 					icon: 'cart',
 					text: '购物车',
-					info: 2
+					info: 0
 				}],
 				buttonGroup: [{
 						text: '加入购物车',
@@ -66,11 +72,29 @@
 				]
 			};
 		},
+		computed: {
+			...mapState("car", ["carList"]),
+			...mapGetters("car", ["total"])
+		},
 		onLoad(options) {
 			const goods_id = options.goods_id
 			this.getGoodsDetail(goods_id)
 		},
+		watch: {
+			// 动态监听total的变化，给购物车徽标赋值
+			total: {
+				handler(newVal) {
+					// 先找到购物车按钮的配置对象
+					const findCar = this.options.find(x => x.text === "购物车")
+					if (findCar) {
+						findCar.info = newVal
+					}
+				},
+				immediate: true
+			}
+		},
 		methods: {
+			...mapMutations("car", ["addToCar"]),
 			async getGoodsDetail(goods_id) {
 				const {
 					data: res
@@ -84,7 +108,6 @@
 					.replace(/webp/g, "jpg")
 				// 为data中的数据赋值
 				this.goods_info = res.message
-
 			},
 			preview(i) {
 				// 预览轮播图图片
@@ -103,6 +126,19 @@
 			},
 			buttonClick(e) {
 				console.log("buttonClick" + e)
+				// 开始加入购物车
+				if (e.content.text === "加入购物车") {
+					// 组织一个商品信息对象
+					const goods = {
+						goods_id: this.goods_info.goods_id,
+						goods_name: this.goods_info.goods_name,
+						goods_price: this.goods_info.goods_price,
+						goods_count: 1,
+						goods_small_logo: this.goods_info.goods_small_logo,
+						goods_state: true
+					}
+					this.addToCar(goods)
+				}
 			}
 		}
 	}

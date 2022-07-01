@@ -5,12 +5,14 @@
 </template>
 
 <script>
+	import carBadge from "@/mixins/tabbar-badge.js"
 	export default {
 		data() {
 			return {
 
 			};
-		}
+		},
+		mixins: [carBadge]
 	}
 </script>
 

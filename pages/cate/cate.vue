@@ -33,6 +33,7 @@
 </template>
 
 <script>
+	import carBadge from "@/mixins/tabbar-badge.js"
 	export default {
 		data() {
 			return {
@@ -48,6 +49,7 @@
 				scrollTop: 0
 			};
 		},
+		mixins: [carBadge],
 		onLoad() {
 			// 动态获取设备高度信息
 			const sysInfo = uni.getSystemInfoSync()
