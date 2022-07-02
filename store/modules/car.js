@@ -38,6 +38,11 @@ export default {
 		delGoods(state, goods_id) {
 			state.carList = state.carList.filter(x => x.goods_id !== goods_id)
 			this.commit("car/saveToStorage")
+		},
+		// 所有商品的勾选状态
+		updateAllGoodsState(state, checked) {
+			state.carList.forEach(goods => goods.goods_state = checked)
+			this.commit("car/saveToStorage")
 		}
 	},
 	// 模块的计算属性
@@ -47,6 +52,16 @@ export default {
 			var count = 0
 			state.carList.forEach(goods => count += goods.goods_count)
 			return count
+		},
+		// 统计已勾选商品的数量
+		checkCount(state) {
+			return state.carList.filter(x => x.goods_state).reduce((total, item) => total += item.goods_count, 0)
+		},
+		// 计算已勾选商品的总价格
+		checkGoodsAmount(state) {
+			return state.carList.filter(x => x.goods_state)
+				.reduce((total, item) => total += item.goods_count * item.goods_price, 0)
+				.toFixed(2)
 		}
 	}
 }

@@ -1,5 +1,7 @@
 <template>
-	<view>
+	<view class="car-container" v-if="carList.length !==0 ">
+		<!-- 收货地址 -->
+		<my-address></my-address>
 		<!-- 购物车标题区域 -->
 		<view class="car-title">
 			<!-- 左侧图标 -->
@@ -17,6 +19,13 @@
 				</uni-swipe-action-item>
 			</view>
 		</uni-swipe-action>
+		<!-- 结算区域 -->
+		<my-pay></my-pay>
+	</view>
+	<!-- 空白购物车区域 -->
+	<view class="empty-car" v-else>
+		<image src="../../static/images/liaotian_active.png" class="empty-img"></image>
+		<text>空空如也~</text>
 	</view>
 </template>
 
@@ -27,7 +36,7 @@
 		mapMutations
 	} from "vuex"
 
-	import carBadge from "@/mixins/tabbar-badge.js"
+	import carBadge from "@/mixins/tabbar-badge"
 
 	export default {
 		data() {
@@ -59,6 +68,10 @@
 </script>
 
 <style lang="scss">
+	.car-container {
+		padding-bottom: 50px;
+	}
+
 	.car-title {
 
 		height: 40px;
@@ -71,5 +84,22 @@
 		.car-title-text {
 			margin-left: 10px;
 		}
+	}
+
+	.empty-car {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		.empty-img {
+			width: 100px;
+			height: 100px;
+		}
+	}
+
+	page {
+		height: 100%;
 	}
 </style>

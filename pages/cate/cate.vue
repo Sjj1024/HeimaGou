@@ -33,7 +33,7 @@
 </template>
 
 <script>
-	import carBadge from "@/mixins/tabbar-badge.js"
+	import carBadge from "@/mixins/tabbar-badge"
 	export default {
 		data() {
 			return {
