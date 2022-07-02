@@ -24,6 +24,14 @@ export default {
 		// 持久化存储购物车中的数据
 		saveToStorage(state) {
 			uni.setStorageSync("carList", JSON.stringify(state.carList))
+		},
+		// 修改商品的勾选状态
+		updateGoodsState(state, goods) {
+			const findGoods = state.carList.find(x => x.goods_id === goods.goods_id)
+			if (findGoods) {
+				findGoods.goods_state = goods.goods_state
+				this.commit("car/saveToStorage")
+			}
 		}
 	},
 	// 模块的计算属性

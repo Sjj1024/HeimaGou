@@ -2,6 +2,7 @@
 	<view class="goods-item">
 		<!-- 商品左侧图片区 -->
 		<view class="goods-item-left">
+			<radio :checked="good.goods_state" color="#c00000" v-if="showRadio" @click="radioChange" />
 			<image :src="good.goods_small_logo || defaultPic" class="goods-pic"></image>
 		</view>
 		<!-- 商品右侧区域信息 -->
@@ -30,12 +31,24 @@
 			good: {
 				type: Object,
 				default: {}
+			},
+			showRadio: {
+				type: Boolean,
+				default: false
 			}
 		},
 		filters: {
 			// 声明过滤器，处理商品价格
 			toFixed(num) {
 				return Number(num).toFixed(2)
+			}
+		},
+		methods: {
+			radioChange() {
+				this.$emit("radioChange", {
+					goods_id: this.good.goods_id,
+					goods_state: !this.good.goods_state
+				})
 			}
 		}
 	}
@@ -48,6 +61,9 @@
 		border-bottom: 1px solid #f0f0f0;
 
 		.goods-item-left {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			margin-right: 5px;
 
 			.goods-pic {
