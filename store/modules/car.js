@@ -30,8 +30,14 @@ export default {
 			const findGoods = state.carList.find(x => x.goods_id === goods.goods_id)
 			if (findGoods) {
 				findGoods.goods_state = goods.goods_state
+				findGoods.goods_count = goods.goods_count
 				this.commit("car/saveToStorage")
 			}
+		},
+		// 删除商品
+		delGoods(state, goods_id) {
+			state.carList = state.carList.filter(x => x.goods_id !== goods_id)
+			this.commit("car/saveToStorage")
 		}
 	},
 	// 模块的计算属性

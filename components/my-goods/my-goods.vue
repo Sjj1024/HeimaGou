@@ -11,9 +11,13 @@
 			<view class="good-name">
 				{{good.goods_name}}
 			</view>
-			<!-- 商品价格 -->
-			<view class="goods-price">
-				¥{{good.goods_price | toFixed}}
+			<view class="good-info">
+				<!-- 商品价格 -->
+				<view class="goods-price">
+					¥{{good.goods_price | toFixed}}
+				</view>
+				<!-- 商品数量 -->
+				<uni-number-box :min="1" :value="good.goods_count" v-if="showNum" @change="numChange"></uni-number-box>
 			</view>
 		</view>
 	</view>
@@ -35,6 +39,10 @@
 			showRadio: {
 				type: Boolean,
 				default: false
+			},
+			showNum: {
+				type: Boolean,
+				default: false
 			}
 		},
 		filters: {
@@ -47,7 +55,16 @@
 			radioChange() {
 				this.$emit("radioChange", {
 					goods_id: this.good.goods_id,
-					goods_state: !this.good.goods_state
+					goods_state: !this.good.goods_state,
+					goods_count: this.good.goods_count
+				})
+			},
+			numChange(num) {
+				// console.log(num);
+				this.$emit("radioChange", {
+					goods_id: this.good.goods_id,
+					goods_state: this.good.goods_state,
+					goods_count: num
 				})
 			}
 		}
@@ -57,6 +74,8 @@
 <style lang="scss">
 	.goods-item {
 		display: flex;
+		width: 750rpx;
+		box-sizing: border-box;
 		padding: 10px 5px;
 		border-bottom: 1px solid #f0f0f0;
 
@@ -85,6 +104,12 @@
 			.goods-price {
 				font-size: 16px;
 				color: #c00000;
+			}
+
+			.good-info {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
 			}
 		}
 	}

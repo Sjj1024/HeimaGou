@@ -7,9 +7,16 @@
 			<!-- 描述文本 -->
 			<text class="car-title-text">购物车</text>
 		</view>
-		<!-- 购物车里的列表 -->
-		<my-goods v-for="(goods, index) in carList" :key="index" :good="goods" :showRadio="true"
-			@radioChange="radioChange"></my-goods>
+
+		<!-- 实现左右滑动删除商品 -->
+		<uni-swipe-action>
+			<view v-for="(goods, index) in carList" :key="index">
+				<uni-swipe-action-item :right-options="options" @click="delClick(goods)">
+					<!-- 购物车里的列表 -->
+					<my-goods :good="goods" :showRadio="true" :showNum="true" @radioChange="radioChange"></my-goods>
+				</uni-swipe-action-item>
+			</view>
+		</uni-swipe-action>
 	</view>
 </template>
 
@@ -25,7 +32,12 @@
 	export default {
 		data() {
 			return {
-
+				options: {
+					text: "删除",
+					style: {
+						backgroundColor: "#C00000"
+					}
+				}
 			};
 		},
 		// 通过mixins修改购物车图标
@@ -34,10 +46,13 @@
 			...mapState("car", ["carList"])
 		},
 		methods: {
-			...mapMutations("car", ["updateGoodsState"]),
+			...mapMutations("car", ["updateGoodsState", "delGoods"]),
 			radioChange(goods) {
-				console.log(goods);
 				this.updateGoodsState(goods)
+			},
+			delClick(goods) {
+				console.log(goods);
+				this.delGoods(goods.goods_id)
 			}
 		}
 	}
