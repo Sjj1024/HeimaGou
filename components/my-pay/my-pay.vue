@@ -10,7 +10,7 @@
 		</view>
 
 		<!-- 结算按钮 -->
-		<view class="btn-pay">
+		<view class="btn-pay" @click="settlement">
 			结算({{checkCount}})
 		</view>
 	</view>
@@ -19,7 +19,8 @@
 <script>
 	import {
 		mapGetters,
-		mapMutations
+		mapMutations,
+		mapState
 	} from "vuex"
 
 	export default {
@@ -31,6 +32,10 @@
 		},
 		computed: {
 			...mapGetters("car", ["checkCount", "total", "checkGoodsAmount"]),
+			// addstr 是详细的收货地址
+			...mapGetters('user', ['addstr']),
+			// token 是用户登录成功之后的 token 字符串
+			...mapState('user', ['token']),
 			isAllCheck() {
 				return this.total === this.checkCount
 			}
@@ -39,6 +44,15 @@
 			...mapMutations("car", ["updateAllGoodsState"]),
 			checkChange() {
 				this.updateAllGoodsState(!this.isAllCheck)
+			},
+			// 点击了结算按钮
+			settlement() {
+				// 1. 先判断是否勾选了要结算的商品
+				if (!this.checkCount) return uni.$showMsg('请选择要结算的商品！')
+				// 2. 再判断用户是否选择了收货地址
+				if (!this.addstr) return uni.$showMsg('请选择收货地址！')
+				// 3. 最后判断用户是否登录了
+				if (!this.token) return uni.$showMsg('请先登录！')
 			}
 		}
 	}
